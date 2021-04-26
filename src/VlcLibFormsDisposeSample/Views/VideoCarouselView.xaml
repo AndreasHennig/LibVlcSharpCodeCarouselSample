@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
+    x:Class="VlcLibFormsDisposeSample.Views.VideoCarouselView">
+    <StackLayout Spacing="16">
+        <CarouselView
+            ItemsSource="{Binding Videos}"
+            Loop="False"
+            HorizontalScrollBarVisibility="Never"
+            IndicatorView="videoIndicatorView"
+            CurrentItemChangedCommand="{Binding ItemChanged}"
+            CurrentItemChangedCommandParameter="{Binding CurrentItem, Source={RelativeSource Self}}"
+            HeightRequest="300">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame
+                            Margin="16"
+                            CornerRadius="16"
+                            VerticalOptions="FillAndExpand">
+                            <vlc:MediaPlayerElement
+                                LibVLC="{Binding LibVLC}"
+                                MediaPlayer="{Binding MediaPlayer}" />
+                        </Frame>
+                        <Label
+                            Text="{Binding Title}"
+                            HorizontalOptions="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <IndicatorView
+            x:Name="videoIndicatorView"
+            IndicatorColor="LightGray"
+            SelectedIndicatorColor="SlateGray"
+            HorizontalOptions="Center"/>
+    </StackLayout>
+</ContentPage>
